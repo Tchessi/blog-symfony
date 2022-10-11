@@ -6,9 +6,10 @@
     <main class="container">
             <div class="row">
                 <div class="col-md-8 ">
-                   <h3 class="pd-4 fst-italic border-bottom">
-                    Tous les articles
-                   </h3>
+                <h3 class="pd-4 fst-italic border-bottom">Articles récents</h3>
+                <div id="article-list">
+                    {% include 'article/list.html.twig' with { articles } %}
+                </div>
                 </div>
 
                 <div class="col-md-4">
