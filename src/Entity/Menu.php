@@ -45,7 +45,6 @@ class Menu
     public function __construct()
     {
         $this->subMenus = new ArrayCollection();
-        $this->subMenu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,53 +69,33 @@ class Menu
         return $this->menuOrder;
     }
 
-    public function setMenuOrder(?int $menuOrder): self
+    public function setMenuOrder(int $menuOrder): self
     {
         $this->menuOrder = $menuOrder;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getSubMenus(): Collection
+    public function getLink(): ?string
     {
-        return $this->subMenus;
+        return $this->link;
     }
 
-    public function addSubMenu(self $subMenu): self
+    public function setLink(?string $link): self
     {
-        if (!$this->subMenus->contains($subMenu)) {
-            $this->subMenus->add($subMenu);
-        }
+        $this->link = $link;
 
         return $this;
     }
 
-    public function removeSubMenu(self $subMenu): self
+    public function getPage(): ?Page
     {
-        $this->subMenus->removeElement($subMenu);
-
-        return $this;
+        return $this->page;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getSubMenu(): Collection
+    public function setPage(?Page $page): self
     {
-        return $this->subMenu;
-    }
-
-    public function isIsVisible(): ?bool
-    {
-        return $this->isVisible;
-    }
-
-    public function setIsVisible(bool $isVisible): self
-    {
-        $this->isVisible = $isVisible;
+        $this->page = $page;
 
         return $this;
     }
@@ -145,26 +124,43 @@ class Menu
         return $this;
     }
 
-    public function getPage(): ?Page
+    /**
+     * @return Collection<int, self>
+     */
+    public function getSubMenus(): Collection
     {
-        return $this->page;
+        return $this->subMenus;
     }
 
-    public function setPage(?Page $page): self
+    public function addSubMenu(self $subMenu): self
     {
-        $this->page = $page;
+        if (!$this->subMenus->contains($subMenu)) {
+            $this->subMenus[] = $subMenu;
+        }
 
         return $this;
     }
 
-    public function getLink(): ?string
+    public function removeSubMenu(self $subMenu): self
     {
-        return $this->link;
+        $this->subMenus->removeElement($subMenu);
+
+        return $this;
     }
 
-    public function setLink(?string $link): self
+    public function __toString(): string
     {
-        $this->link = $link;
+        return $this->name;
+    }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }
