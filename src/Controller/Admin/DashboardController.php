@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ArticleCrudController;
+use App\Entity\Media;
 use App\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -53,7 +54,7 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud( 'Liens personnalisés', 'fas fa-link', Menu::class ),
                 MenuItem::linkToCrud( 'Catégories', 'fab fa-delicious', Menu::class ),
 
-        ]);
+            ]);
         }
 
         if ($this->isGranted('ROLE_AUTHOR')) {
@@ -62,7 +63,12 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud( 'Tous les articles', 'fas fa-newspaper', Article::class ),
                 MenuItem::linkToCrud( 'Ajouter', 'fas fa-plus', Article::class )->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud( 'Catégories', 'fas fa-list', Category::class )
-        ]);
+            ]);
+
+            yield MenuItem::subMenu('Médias', 'fas fa-photo-video')->setSubItems([
+                MenuItem::linkToCrud( 'Médiathèque', 'fas fa-photo-video', Media::class ),
+                MenuItem::linkToCrud( 'Ajouter', 'fas fa-plus', Media::class )->setAction(Crud::PAGE_NEW)
+            ]);
         }
 
         if ($this->isGranted('ROLE_ADMIN')) {
@@ -71,7 +77,7 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::subMenu('Comptes', 'fas fa-user')->setSubItems([
                 MenuItem::linkToCrud( 'Tous les comptes', 'fas fa-user-freinds ', User::class ),
                 MenuItem::linkToCrud( 'Ajouter', 'fas fa-plus', User::class )->setAction(Crud::PAGE_NEW)
-        ]);
+            ]);
         }
         
     }   

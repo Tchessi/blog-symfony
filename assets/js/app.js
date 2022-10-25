@@ -50,7 +50,8 @@ class App {
 				commentList.insertAdjacentHTML('beforeend', json.message);
 				commentList.lastElementChild.scrollIntoView();
 				commentCount.innerText = json.numberOfComments;
-				commentContent.value = ''; 
+				commentContent = ''; 
+			
 			}
 		});
 
