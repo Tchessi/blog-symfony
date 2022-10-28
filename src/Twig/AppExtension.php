@@ -9,6 +9,8 @@ use Twig\Extension\AbstractExtension;
 use Symfony\Component\Routing\RouterInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
+
+
 class AppExtension extends AbstractExtension
 {
 
@@ -29,16 +31,23 @@ class AppExtension extends AbstractExtension
   public function getFunctions(): array
 	{
 		return [
-			new TwigFunction('ea_index', [$this, 'getAdminUrl']),
+			new TwigFunction('ea_gen_url', [$this, 'getAdminUrl']),
 		];
 	}
 
-  public function getAdminUrl(string $controller): string
+  public function getAdminUrl(string $controller, ?string $action = null): string
   {
-    return $this->adminUrlGenerator
-          ->setController(self::ADMIN_NAMESPACE . '\\' . $controller)
-          ->generateUrl();
+    $adminUrlGenerator =  $this->adminUrlGenerator
+      ->setController(self::ADMIN_NAMESPACE . DIRECTORY_SEPARATOR . $controller);
+
+      if ($action) {
+        $adminUrlGenerator->setAction($action);
+      }
+
+      return $adminUrlGenerator->generateUrl();
   }
+
+
 	public function menuLink(Menu $menu): string
     {
       $article = $menu->getArticle();
@@ -74,4 +83,3 @@ class AppExtension extends AbstractExtension
       ]);
     }
 }
- 

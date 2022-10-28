@@ -12,7 +12,7 @@
           {{ category.name }}
         </h3>
         <div id="article-list">
-          {% include 'article/list.html.twig' with { articles: category.articles, leftCol: 4, rightCol:8 } %}
+          {% include 'article/list.html.twig' with { articles: articles, leftCol: 4, rightCol:8 } %}
         </div>
       </div>
     </div>

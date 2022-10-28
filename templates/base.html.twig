@@ -35,7 +35,7 @@
 						</li>
 						{% if is_granted('ROLE_ADMIN') %}
 							<li>
-								<a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a>
+								<a class="dropdown-item" href="{{ ea_gen_url('MenuCrudController') }}">Menus</a>
 							</li>
 						{% endif %}
 					</ul>
@@ -48,10 +48,10 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#">Article</a>
+							<a class="dropdown-item" href="{{ ea_gen_url('ArticleCrudController', 'new') }}">Article</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#">Page</a>
+							<a class="dropdown-item" href="{{ ea_gen_url('PageCrudController', 'new') }}">Page</a>
 						</li>
 					</ul>
 				</div>
@@ -122,7 +122,8 @@
 		<div class="container">
 			<footer class="d-flex align-items-center py-3 my-4 border-top">
 				<div class="col-md-4 d-flex align-items-center">
-					<a href="#" class="nav nav-link">Mon github</a>
+					<a href="https://github.com/Tchessi/" target="_blank" class="nav nav-link copyright">Github</a>
+					<span class="copyright">© Tchèssi {{ 'now'|date('Y') }}</span>
 				</div>
 			</footer>
 		</div>
